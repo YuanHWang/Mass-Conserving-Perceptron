@@ -3,18 +3,7 @@ import torch.nn as nn
 from torch import Tensor
 
 class ARX_LeafRiver_Qsim(nn.Module):
-    """Implementation of the standard LSTM.
-    TODO: Include ref and LaTeX equations
-    Parameters
-    ----------
-    input_size : int
-        Number of input features
-    batch_first : bool, optional
-        If True, expects the batch inputs to be of shape [batch, seq, features] otherwise, the
-        shape has to be [seq, batch, features], by default True.
-    initial_forget_bias : int, optional
-        Value of the initial forget gate bias, by default 0
-    """
+
     def __init__(self,
                  input_size: int,
                  batch_first: bool = True):
@@ -36,20 +25,6 @@ class ARX_LeafRiver_Qsim(nn.Module):
         self.bias = nn.Parameter(torch.rand(1))
 
     def forward(self, x):
-        """[summary]
-        
-        Parameters
-        ----------
-        x : torch.Tensor
-            Tensor, containing a batch of input sequences. Format must match the specified format,
-            defined by the batch_first agrument.
-        Returns
-        -------
-        h_n : torch.Tensor
-            The hidden states of each time step of each sample in the batch.
-        c_n : torch.Tensor]
-            The cell states of each time step of each sample in the batch.
-        """
 
         if self.batch_first:
             x = x.transpose(0, 1)
@@ -72,20 +47,7 @@ class ARX_LeafRiver_Qsim(nn.Module):
         return h_n
 
 class ANN_LeafRiver_Sigmoid_qsim(nn.Module):
-    """Implementation of the standard LSTM.
-    TODO: Include ref and LaTeX equations
-    Parameters
-    ----------
-    input_size : int
-        Number of input features
-    hidden_size : int
-        Number of hidden/memory cells.
-    batch_first : bool, optional
-        If True, expects the batch inputs to be of shape [batch, seq, features] otherwise, the
-        shape has to be [seq, batch, features], by default True.
-    initial_forget_bias : int, optional
-        Value of the initial forget gate bias, by default 0
-    """
+
     def __init__(self,
                  input_size: int,
                  batch_first: bool = True,
@@ -116,20 +78,7 @@ class ANN_LeafRiver_Sigmoid_qsim(nn.Module):
         self.bias_ln = nn.Parameter(torch.rand(1))
 
     def forward(self, x):
-        """[summary]
-        
-        Parameters
-        ----------
-        x : torch.Tensor
-            Tensor, containing a batch of input sequences. Format must match the specified format,
-            defined by the batch_first agrument.
-        Returns
-        -------
-        h_n : torch.Tensor
-            The hidden states of each time step of each sample in the batch.
-        c_n : torch.Tensor]
-            The cell states of each time step of each sample in the batch.
-        """
+
         if self.batch_first:
             x = x.transpose(0, 1)
         seq_len, batch_size, _ = x.size()
@@ -153,18 +102,7 @@ class ANN_LeafRiver_Sigmoid_qsim(nn.Module):
         return h_n,y_h,y_hs
 
 class Vanilla_RNN_Sigmoid_Qsim_SingleNode(nn.Module):
-    """Implementation of the standard LSTM.
-    TODO: Include ref and LaTeX equations
-    Parameters
-    ----------
-    input_size : int
-        Number of input features
-    batch_first : bool, optional
-        If True, expects the batch inputs to be of shape [batch, seq, features] otherwise, the
-        shape has to be [seq, batch, features], by default True.
-    initial_forget_bias : int, optional
-        Value of the initial forget gate bias, by default 0
-    """
+
     def __init__(self,
                  input_size: int,
                  batch_first: bool = True,
@@ -191,20 +129,7 @@ class Vanilla_RNN_Sigmoid_Qsim_SingleNode(nn.Module):
         self.bias = nn.Parameter(torch.rand(1))
 
     def forward(self, x):
-        """[summary]
-        
-        Parameters
-        ----------
-        x : torch.Tensor
-            Tensor, containing a batch of input sequences. Format must match the specified format,
-            defined by the batch_first agrument.
-        Returns
-        -------
-        h_n : torch.Tensor
-            The hidden states of each time step of each sample in the batch.
-        c_n : torch.Tensor]
-            The cell states of each time step of each sample in the batch.
-        """
+
         if self.batch_first:
             x = x.transpose(0, 1)
         seq_len, batch_size, _ = x.size()
@@ -228,18 +153,7 @@ class Vanilla_RNN_Sigmoid_Qsim_SingleNode(nn.Module):
         return h_n,y_h,y_hs
 
 class Vanilla_RNN_Sigmoid_Qsim(nn.Module):
-    """Implementation of the standard LSTM.
-    TODO: Include ref and LaTeX equations
-    Parameters
-    ----------
-    input_size : int
-        Number of input features
-    batch_first : bool, optional
-        If True, expects the batch inputs to be of shape [batch, seq, features] otherwise, the
-        shape has to be [seq, batch, features], by default True.
-    initial_forget_bias : int, optional
-        Value of the initial forget gate bias, by default 0
-    """
+
     def __init__(self,
                  input_size: int,
                  batch_first: bool = True,
@@ -270,20 +184,7 @@ class Vanilla_RNN_Sigmoid_Qsim(nn.Module):
         self.bias_ln = nn.Parameter(torch.rand(1))
 
     def forward(self, x):
-        """[summary]
-        
-        Parameters
-        ----------
-        x : torch.Tensor
-            Tensor, containing a batch of input sequences. Format must match the specified format,
-            defined by the batch_first agrument.
-        Returns
-        -------
-        h_n : torch.Tensor
-            The hidden states of each time step of each sample in the batch.
-        c_n : torch.Tensor]
-            The cell states of each time step of each sample in the batch.
-        """
+
         if self.batch_first:
             x = x.transpose(0, 1)
         seq_len, batch_size, _ = x.size()
