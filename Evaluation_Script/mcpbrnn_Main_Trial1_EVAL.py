@@ -30,7 +30,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--case_no',
                         type=int,
                         default=0,
-                        help="Case Number: Initial values for the parameters of Hydro-MC-simple-LSTM")
+                        help="Case Number")
 
 parser.add_argument('--epoch_no',
                         type=int,
@@ -40,7 +40,7 @@ parser.add_argument('--epoch_no',
 parser.add_argument('--depth_size',
                         type=int,
                         default=1,
-                        help="number of hidden nodes")
+                        help="layer depth")
 
 parser.add_argument('--time_lag',
                         type=int,
@@ -50,7 +50,7 @@ parser.add_argument('--time_lag',
 parser.add_argument('--gate_dim',
                         type=int,
                         default=1,
-                        help="number of nodes for ANN functions")
+                        help="dim of gate")
 
 parser.add_argument('--seed_no',
                         type=int,
@@ -60,12 +60,12 @@ parser.add_argument('--seed_no',
 parser.add_argument('--c_mean',
                         type=float,
                         default=272.5801839,
-                        help="")
+                        help="40-year mean of cell state")
 
 parser.add_argument('--c_std',
                         type=float,
                         default=65.81000275,
-                        help="")
+                        help="40-year std of cell state")
 
 cfg = vars(parser.parse_args())
 

@@ -44,7 +44,7 @@ parser.add_argument('--epoch_no',
 parser.add_argument('--depth_size',
                         type=int,
                         default=1,
-                        help="number of hidden nodes")
+                        help="layer depth")
 
 parser.add_argument('--time_lag',
                         type=int,
@@ -54,22 +54,22 @@ parser.add_argument('--time_lag',
 parser.add_argument('--gate_dim',
                         type=int,
                         default=1,
-                        help="number of nodes for ANN functions")
+                        help="dim of gate")
 
 parser.add_argument('--gate_dim_o',
                         type=int,
                         default=1,
-                        help="number of nodes for single-layer ANN functions in output gate")
+                        help="dim of output gate")
 
 parser.add_argument('--gate_dim_l',
                         type=int,
                         default=1,
-                        help="number of nodes for single-layer ANN functions in loss gate")
+                        help="dim of loss gate")
 
 parser.add_argument('--gate_dim_ucorr',
                         type=int,
                         default=1,
-                        help="")
+                        help="trivial in this case")
 
 parser.add_argument('--seed_no',
                         type=int,
@@ -79,17 +79,17 @@ parser.add_argument('--seed_no',
 parser.add_argument('--hidden_size',
                         type=int,
                         default=1,
-                        help="specify the number of mcpbrnn Node")
+                        help="number of node")
 
 parser.add_argument('--c_mean',
                         type=float,
                         default=543.3166693,
-                        help="")
+                        help="40-year mean of cell state")
 
 parser.add_argument('--c_std',
                         type=float,
                         default=79.61569861,
-                        help="")
+                        help="40-year std of cell state")
 
 cfg = vars(parser.parse_args())
 

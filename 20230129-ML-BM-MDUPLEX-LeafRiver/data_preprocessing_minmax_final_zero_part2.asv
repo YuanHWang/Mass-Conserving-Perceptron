@@ -1,0 +1,73 @@
+clc;clear;
+z=importdata('LeafRiverDaily_40YR_Flag.txt');z(1:5)=99999;
+z2=importdata('LeafRiverDaily_40YR.txt');
+PP=z2(:,1);PET=z2(:,2);Qobs=z2(:,3);len=size(PP,1);
+%%
+fileindex = [...
+             0 1 0;...
+             0 2 0;...
+             0 3 0;...             
+             0 4 0;...             
+             0 5 0;...  
+             0 0 1;...
+             0 0 1;...
+             0 0 1;...             
+             0 0 1;...             
+             0 0 1;...  
+             0 1 1;...
+             0 2 1;...
+             0 3 1;...             
+             0 4 1;...             
+             0 5 1;...                 
+             ];
+%% Deal with time-lag
+for iloc=2:max(max(fileindex))+1
+    Qobs_lag(iloc:len,iloc-1)=Qobs(1:len-iloc+1,1);
+end
+for iloc=2:max(max(fileindex))+1
+    PP_lag(iloc-1:len,iloc-1)=PP(1:len-iloc+2,1);
+    PET_lag(iloc-1:len,iloc-1)=PET(1:len-iloc+2,1);
+end    
+PP_lag=cat(2,PP,PP_lag);PP_lag(:,1)=[];
+PET_lag=cat(2,PET,PET_lag);PET_lag(:,1)=[];
+%% calculate statistics
+% P_static=PP_lag(z<=0,:);
+% PET_static=PET_lag(z<=0,:);
+% Q_static=Qobs_lag(z<=0,:);
+% Statics.P(1,:)=mean(z2(:,1));
+% Statics.P(2,:)=std(z2(:,1));
+% Statics.Q(1,:)=mean(z2(:,3));
+% Statics.Q(2,:)=std(z2(:,3));
+% Statics.PET(1,:)=mean(z2(:,2));
+% Statics.PET(2,:)=std(z2(:,2));
+% Statics.Qbs(1)=mean(z2(:,3));
+% Statics.Qbs(2)=std(z2(:,3));
+% %%
+for iloc=1:5
+    if (iloc==6)
+        for jloc=1:14610
+            PP_lag(jloc,iloc)=(PP_lag(jloc,iloc))./max(z2(:,1));
+            PET_lag(jloc,iloc)=(PET_lag(jloc,1))./max(z2(:,2));
+        end
+    else
+        for jloc=1:14610
+            PP_lag(jloc,iloc)=(PP_lag(jloc,iloc))./max(z2(:,1));
+            PET_lag(jloc,iloc)=(PET_lag(jloc,iloc))./max(z2(:,2));
+            Qobs_lag(jloc,iloc)=(Qobs_lag(jloc,iloc))./max(z2(:,3));   
+        end
+    end 
+end
+Qobs=Qobs./max(z2(:,3));
+%%
+for iloc=1:size(fileindex)
+    outputfilename=['data_final/LeafRiverDaily_PP_lag' num2str(fileindex(iloc,1))  '_Q_lag_' num2str(fileindex(iloc,2)) '_PET_lag_' num2str(fileindex(iloc,3)) '_40YR.csv'];
+    A1=fileindex(iloc,1);A2=fileindex(iloc,2);A3=fileindex(iloc,3);
+    if (A1==0)
+        output=cat(2,Qobs_lag(:,1:A2),PET_lag(:,1:A3),Qobs);
+    elseif(A2==0)
+        output=cat(2,PP_lag(:,1:A1),PET_lag(:,1:A3),Qobs);
+    elseif(A3==0)
+        output=cat(2,PP_lag(:,1:A1),Qobs_lag(:,1:A2),Qobs);
+    end
+    csvwrite(outputfilename,output);
+end
