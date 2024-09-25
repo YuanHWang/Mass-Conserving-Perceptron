@@ -184,20 +184,6 @@ testx, testy = Variable(x_test_new), Variable(y_test_new)
 fullx, fully = Variable(x_full_new), Variable(y_full_new)
 
 class LSTM(nn.Module):
-    """Implementation of the standard LSTM.
-    TODO: Include ref and LaTeX equations
-    Parameters
-    ----------
-    input_size : int
-        Number of input features
-    hidden_size : int
-        Number of hidden/memory cells.
-    batch_first : bool, optional
-        If True, expects the batch inputs to be of shape [batch, seq, features] otherwise, the
-        shape has to be [seq, batch, features], by default True.
-    initial_forget_bias : int, optional
-        Value of the initial forget gate bias, by default 0
-    """
 
     def __init__(self,
                  input_size: int,
@@ -217,20 +203,7 @@ class LSTM(nn.Module):
         self.bias = nn.Parameter(torch.FloatTensor(4 * hidden_size))
 
     def forward(self, x):
-        """[summary]
-        
-        Parameters
-        ----------
-        x : torch.Tensor
-            Tensor, containing a batch of input sequences. Format must match the specified format,
-            defined by the batch_first agrument.
-        Returns
-        -------
-        h_n : torch.Tensor
-            The hidden states of each time step of each sample in the batch.
-        c_n : torch.Tensor]
-            The cell states of each time step of each sample in the batch.
-        """
+
         if self.batch_first:
             x = x.transpose(0, 1)
 
@@ -282,22 +255,7 @@ class Model(nn.Module):
                  hidden_size: int,
                  initial_forget_bias: int = 0,
                  dropout: float = 0.0):
-        """Initialize model.
-        Parameters
-        ----------
-        input_size_dyn: int
-            Number of dynamic input features.
-        hidden_size: int
-            Number of LSTM cells/hidden units.
-        initial_forget_bias: int
-            Value of the initial forget gate bias. (default: 5)
-        dropout: float
-            Dropout probability in range(0,1). (default: 0.0)
-        concat_static: bool
-            If True, uses standard LSTM otherwise uses EA-LSTM
-        no_static: bool
-            If True, runs standard LSTM
-        """
+ 
         super(Model, self).__init__()
         self.input_size_dyn = input_size_dyn
         self.hidden_size = hidden_size
@@ -312,20 +270,7 @@ class Model(nn.Module):
         #self.fc = nn.Linear(hidden_size, 1)
 
     def forward(self, x_d):
-        """Run forward pass through the model.
-        Parameters
-        ----------
-        x_d : torch.Tensor
-            Tensor containing the dynamic input features of shape [batch, seq_length, n_features]
-        Returns
-        -------
-        out : torch.Tensor
-            Tensor containing the network predictions
-        h_n : torch.Tensor
-            Tensor containing the hidden states of each time step
-        c_n : torch,Tensor
-            Tensor containing the cell states of each time step
-        """
+
         h_n, c_n = self.lstm(x_d)        
         last_h = self.dropout(h_n[:, -1, :])   
         #out = self.fc(last_h)

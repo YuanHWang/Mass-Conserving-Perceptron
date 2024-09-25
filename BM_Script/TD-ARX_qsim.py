@@ -203,31 +203,13 @@ y_new = y_new.float()
 trainx, trainy = Variable(x_new), Variable(y_new)
 
 class Model(nn.Module):
-    """Wrapper class that connects LSTM/EA-LSTM with fully connceted layer"""
 
     def __init__(self,
                  input_size_dyn: int,
                  input_size_stat: int,
                  initial_forget_bias: int = 0,
                  dropout: float = 0.0):
-        """Initialize model.
-        Parameters
-        ----------
-        input_size_dyn: int
-            Number of dynamic input features.
-        input_size_stat: int
-            Number of static input features (used in the EA-LSTM input gate).
-        hidden_size: int
-            Number of LSTM cells/hidden units.
-        initial_forget_bias: int
-            Value of the initial forget gate bias. (default: 5)
-        dropout: float
-            Dropout probability in range(0,1). (default: 0.0)
-        concat_static: bool
-            If True, uses standard LSTM otherwise uses EA-LSTM
-        no_static: bool
-            If True, runs standard LSTM
-        """
+
         super(Model, self).__init__()
         self.input_size_dyn = input_size_dyn
         self.input_size_stat = input_size_stat 
@@ -235,20 +217,6 @@ class Model(nn.Module):
         self.dropout = nn.Dropout(p=dropout)
 
     def forward(self, x_d):
-        """Run forward pass through the model.
-        Parameters
-        ----------
-        x_d : torch.Tensor
-            Tensor containing the dynamic input features of shape [batch, seq_length, n_features]
-        Returns
-        -------
-        out : torch.Tensor
-            Tensor containing the network predictions
-        h_n : torch.Tensor
-            Tensor containing the hidden states of each time step
-        c_n : torch,Tensor
-            Tensor containing the cell states of each time step
-        """
 
         h_t = self.MCPBRNNNode(x_d)    
         last_h = self.dropout(h_t)      
