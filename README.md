@@ -15,3 +15,5 @@ conda env create -f environment.yml
 The code will work with other Python environments that have different package versions, such as newer PyTorch versions, as long as all necessary packages are installed.
 
 ## Introduction to Each Folder
+* 20220527-MDUPLEX-LeafRiver
+  Contains the 40-year Leaf River data and the associated flags for training, selection, and testing sets.
