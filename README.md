@@ -1,4 +1,4 @@
-# MassConservingPerceptron
+# Mass-Conserving-Perceptron (MCP)
 
 This repository contains all the necessary scripts and data for reproducing the results presented in the publication: 
 
