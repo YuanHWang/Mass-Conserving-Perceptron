@@ -7,7 +7,10 @@ Wang, Y.H. and Gupta, H.V., 2024. A mass‐conserving‐perceptron for machine�
 ## Get Started
 
 The environment we used for the manuscript above is provided in the file environment.yml. To create the same conda environment, please ensure that conda is installed, then run:
+
+```
 conda env create -f environment.yml
+```
 
 The code will work with other Python environments that have different package versions, such as newer PyTorch versions, as long as all necessary packages are installed.
 
