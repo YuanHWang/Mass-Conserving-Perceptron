@@ -17,7 +17,10 @@ The code will work with other Python environments that have different package ve
 ## Introduction to Each Folder
 
 * **20220527-MDUPLEX-LeafRiver**:
-  Contains the [40-year Leaf River data](https://agupubs.onlinelibrary.wiley.com/doi/10.1029/WR019i001p00251) and the associated flags for training, selection, and testing sets.
+  Contains the [40-year Leaf River data](https://agupubs.onlinelibrary.wiley.com/doi/10.1029/WR019i001p00251) and the associated flags for training, selection, and testing sets. This 
+  folder also contains the implementation of [MDUPLEX](https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2021WR031818) algorithm (.m script), which splits the data into 
+  training, selection, and testing sets. 
+
 * **MCPBRNN_lib_tools**:
   The primary library used to train the mass-conserving-perceptron, as well as various physics-based and data-driven benchmark models.
 * **Training_Script**: 
