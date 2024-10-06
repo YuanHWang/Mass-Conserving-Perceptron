@@ -17,7 +17,9 @@ The code will work with other Python environments that have different package ve
 ## Introduction to Each Folder
 
 * **20220527-MDUPLEX-LeafRiver**:
-  Contains the 40-year Leaf River data and the associated flags for training, selection, and testing sets.
+  Contains the 40-year Leaf River data [40-year Leaf River data]([https://repository.arizona.edu/handle/10150/668421](https://agupubs.onlinelibrary.wiley.com/doi/10.1029/WR019i001p00251))
+
+  and the associated flags for training, selection, and testing sets.
 * **MCPBRNN_lib_tools**:
   The primary library used to train the mass-conserving-perceptron, as well as various physics-based and data-driven benchmark models.
 * **Training_Script**: 
